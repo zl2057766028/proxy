@@ -3,707 +3,698 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>IKUN · 坤坤应援首页</title>
-  <meta name="description" content="ikun风格网页首页（单文件HTML/CSS/JS）" />
+  <meta name="description" content="iKun 坤坤风格首页" />
+  <title>iKun · 坤坤首页</title>
   <style>
     :root{
-      --bg:#070812;
-      --card: rgba(255,255,255,.08);
-      --card2: rgba(255,255,255,.05);
-      --stroke: rgba(255,255,255,.14);
+      --bg: #0b0f1a;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.09);
       --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.70);
-      --pink:#ff3ea5;
-      --purple:#7c5cff;
-      --cyan:#29e6ff;
-      --gold:#ffd36a;
-      --shadow: 0 18px 60px rgba(0,0,0,.55);
-      --r: 22px;
+      --muted: rgba(255,255,255,.65);
+      --line: rgba(255,255,255,.12);
+      --pink: #ff3b8d;
+      --cyan: #37d0ff;
+      --yellow: #ffd24a;
+      --ok: #3dffb2;
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 22px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans SC", "PingFang SC","Microsoft YaHei", Arial, sans-serif;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    *{ box-sizing: border-box; }
+    html,body{ height: 100%; }
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", Arial, sans-serif;
-      color:var(--text);
-      background: radial-gradient(1200px 600px at 20% 10%, rgba(124,92,255,.22), transparent 60%),
-                  radial-gradient(900px 500px at 75% 18%, rgba(255,62,165,.18), transparent 60%),
-                  radial-gradient(1000px 700px at 55% 95%, rgba(41,230,255,.14), transparent 55%),
-                  linear-gradient(180deg, #050611, #050611 40%, #070812);
+      font-family: var(--sans);
+      color: var(--text);
+      background: radial-gradient(1200px 600px at 10% 5%, rgba(55,208,255,.18), transparent 55%),
+                  radial-gradient(900px 600px at 90% 10%, rgba(255,59,141,.18), transparent 55%),
+                  radial-gradient(800px 600px at 60% 95%, rgba(255,210,74,.12), transparent 55%),
+                  linear-gradient(180deg, #070a12 0%, #0b0f1a 60%, #070a12 100%);
       overflow-x:hidden;
     }
-
-    /* 背景动效网格 */
-    .grid{
-      position:fixed; inset:0;
-      pointer-events:none;
-      background-image:
-        linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
-      background-size: 56px 56px;
-      mask-image: radial-gradient(600px 420px at 50% 20%, black 30%, transparent 65%);
-      opacity:.35;
-      transform: translateZ(0);
-    }
-
-    /* 流光 */
-    .glow{
-      position:fixed; inset:-40vh -40vw;
-      pointer-events:none;
-      background:
-        conic-gradient(from 210deg at 50% 50%,
-          rgba(255,62,165,.0),
-          rgba(255,62,165,.35),
-          rgba(124,92,255,.25),
-          rgba(41,230,255,.22),
-          rgba(255,211,106,.18),
-          rgba(255,62,165,.0));
-      filter: blur(50px);
-      opacity:.55;
-      animation: drift 16s ease-in-out infinite;
-    }
-    @keyframes drift{
-      0%,100%{ transform: translate(-2%, -1%) rotate(0deg) }
-      50%{ transform: translate(2%, 1%) rotate(18deg) }
+    a{ color: inherit; text-decoration:none; }
+    .wrap{
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 22px 0 70px;
+      position: relative;
     }
 
     /* 顶部导航 */
     .nav{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter: blur(12px);
-      background: linear-gradient(180deg, rgba(7,8,18,.72), rgba(7,8,18,.35));
-      border-bottom: 1px solid rgba(255,255,255,.10);
-    }
-    .nav-inner{
-      max-width:1100px;
-      margin:0 auto;
-      padding:14px 18px;
+      position: sticky;
+      top: 14px;
+      z-index: 20;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
       display:flex;
       align-items:center;
-      justify-content:space-between;
-      gap:12px;
+      justify-content: space-between;
+      gap: 10px;
     }
     .brand{
       display:flex; align-items:center; gap:10px;
-      user-select:none;
+      padding-left: 6px;
+      min-width: 190px;
     }
     .logo{
-      width:36px; height:36px; border-radius:12px;
-      background: radial-gradient(circle at 30% 30%, rgba(255,62,165,.9), rgba(124,92,255,.85) 40%, rgba(41,230,255,.75) 75%);
-      box-shadow: 0 10px 30px rgba(124,92,255,.25);
-      position:relative;
+      width: 34px; height: 34px; border-radius: 12px;
+      background:
+        radial-gradient(18px 18px at 30% 30%, rgba(255,255,255,.9), rgba(255,255,255,0) 60%),
+        linear-gradient(135deg, rgba(55,208,255,.95), rgba(255,59,141,.95));
+      box-shadow: 0 10px 30px rgba(255,59,141,.15);
+      position: relative;
       overflow:hidden;
     }
     .logo:after{
       content:"";
       position:absolute; inset:-40%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.45), transparent);
-      transform: rotate(25deg);
-      animation: shine 2.8s ease-in-out infinite;
-      opacity:.55;
+      background: conic-gradient(from 120deg, rgba(255,255,255,.0), rgba(255,255,255,.35), rgba(255,255,255,0));
+      animation: spin 2.8s linear infinite;
     }
-    @keyframes shine{
-      0%{ transform: translateX(-30%) rotate(25deg) }
-      50%{ transform: translateX(30%) rotate(25deg) }
-      100%{ transform: translateX(-30%) rotate(25deg) }
-    }
-    .brand .name{
-      font-weight:800;
-      letter-spacing:.6px;
-    }
-    .tag{
-      font-size:12px;
-      color:var(--muted);
-      padding:4px 10px;
-      border:1px solid rgba(255,255,255,.14);
-      border-radius:999px;
-      background: rgba(255,255,255,.04);
-    }
-    .nav-links{
-      display:flex; align-items:center; gap:8px; flex-wrap:wrap;
-    }
-    .link{
-      font-size:13px;
-      color:var(--muted);
-      text-decoration:none;
-      padding:8px 10px;
-      border-radius:12px;
-      transition:.2s ease;
-    }
-    .link:hover{
-      color:var(--text);
-      background: rgba(255,255,255,.06);
-    }
+    @keyframes spin{ to{ transform: rotate(360deg);} }
+    .brand strong{ font-weight: 800; letter-spacing: .3px; }
+    .brand small{ display:block; color: var(--muted); font-family: var(--mono); font-size: 12px; margin-top: 2px; }
 
-    /* 容器 */
-    .wrap{ max-width:1100px; margin:0 auto; padding: 28px 18px 80px; }
-
-    /* 首屏 */
-    .hero{
-      display:grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap:22px;
-      align-items:stretch;
-      margin-top:10px;
+    .navlinks{
+      display:flex; align-items:center; gap: 6px;
+      flex: 1;
+      justify-content: center;
+      flex-wrap: wrap;
     }
-    @media (max-width: 920px){
-      .hero{ grid-template-columns: 1fr; }
-    }
-    .card{
-      border-radius: var(--r);
-      border: 1px solid rgba(255,255,255,.12);
-      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      position:relative;
-    }
-    .card::before{
-      content:"";
-      position:absolute; inset:-2px;
-      background: radial-gradient(700px 260px at 20% 10%, rgba(255,62,165,.22), transparent 60%),
-                  radial-gradient(600px 300px at 90% 0%, rgba(41,230,255,.16), transparent 55%);
-      pointer-events:none;
-      opacity:.9;
-    }
-    .card > *{ position:relative; z-index:2; }
-
-    .hero-left{ padding: 28px 26px; }
-    .kicker{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.05);
-      color:var(--muted);
-      font-size:13px;
-    }
-    .dot{
-      width:8px; height:8px; border-radius:99px;
-      background: var(--pink);
-      box-shadow: 0 0 0 6px rgba(255,62,165,.16);
-      animation: pulse 1.4s ease-in-out infinite;
-    }
-    @keyframes pulse{
-      0%,100%{ transform: scale(1); opacity: .9 }
-      50%{ transform: scale(1.15); opacity: .65 }
-    }
-
-    h1{
-      margin: 14px 0 10px;
-      font-size: clamp(32px, 4.6vw, 54px);
-      line-height: 1.05;
-      letter-spacing: .4px;
-    }
-    .grad{
-      background: linear-gradient(90deg, var(--pink), var(--purple) 45%, var(--cyan));
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-    }
-    .desc{
-      margin: 10px 0 18px;
-      color: var(--muted);
-      font-size: 15px;
-      line-height:1.7;
-      max-width: 52ch;
-    }
-    .cta{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      align-items:center;
-    }
-    .btn{
-      border:0;
-      cursor:pointer;
-      border-radius: 16px;
-      padding: 12px 14px;
-      font-weight: 700;
-      color: rgba(255,255,255,.94);
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.14);
-      transition: transform .15s ease, background .2s ease, border-color .2s ease;
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      user-select:none;
-    }
-    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.2); }
-    .btn:active{ transform: translateY(0px) scale(.99); }
-    .btn.primary{
-      background: linear-gradient(90deg, rgba(255,62,165,.9), rgba(124,92,255,.86), rgba(41,230,255,.80));
-      border-color: rgba(255,255,255,.18);
-      box-shadow: 0 14px 40px rgba(124,92,255,.18);
-    }
-    .btn .icon{ width:18px; height:18px; display:inline-block; }
-    .hint{
-      font-size: 13px;
-      color: rgba(255,255,255,.62);
-      margin-top: 12px;
-    }
-    .stats{
-      display:flex; gap:10px; flex-wrap:wrap;
-      margin-top: 16px;
-    }
-    .pill{
+    .chip{
       padding: 8px 12px;
       border-radius: 999px;
+      border: 1px solid transparent;
+      color: rgba(255,255,255,.85);
+      background: rgba(255,255,255,.03);
+      transition: .18s ease;
+      font-size: 14px;
+    }
+    .chip:hover{
+      background: rgba(255,255,255,.07);
+      border-color: rgba(255,255,255,.10);
+      transform: translateY(-1px);
+    }
+    .actions{
+      display:flex; align-items:center; gap: 8px;
+      min-width: 210px;
+      justify-content: flex-end;
+      padding-right: 6px;
+    }
+    .btn{
       border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.04);
-      color: rgba(255,255,255,.78);
-      font-size: 13px;
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
-    }
-    .pill b{ color: rgba(255,255,255,.95); }
-
-    /* 右侧：应援面板 */
-    .hero-right{ padding: 20px; }
-    .panel{
-      padding: 16px;
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-    }
-    .panel h2{
-      margin: 0 0 10px;
-      font-size: 16px;
-      letter-spacing: .4px;
+      background: rgba(255,255,255,.06);
       color: rgba(255,255,255,.9);
-    }
-    .meter{
-      height: 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.12);
-      overflow:hidden;
-      position:relative;
-    }
-    .meter > span{
-      display:block;
-      height:100%;
-      width: 35%;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--pink), var(--purple), var(--cyan));
-      box-shadow: 0 0 20px rgba(255,62,165,.25);
-      transition: width .35s ease;
-    }
-    .row{
+      padding: 9px 12px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: .18s ease;
       display:flex;
-      justify-content:space-between;
       align-items:center;
-      margin-top: 10px;
-      color: rgba(255,255,255,.72);
-      font-size: 13px;
+      gap: 8px;
+      user-select:none;
     }
-    .row .big{ font-weight:800; color: rgba(255,255,255,.92); }
-    .mini{
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.09); }
+    .btn.primary{
+      border-color: rgba(255,59,141,.35);
+      background: linear-gradient(135deg, rgba(255,59,141,.22), rgba(55,208,255,.14));
+      box-shadow: 0 14px 40px rgba(255,59,141,.16);
+    }
+    .kbd{
+      font-family: var(--mono);
+      font-size: 12px;
+      color: rgba(255,255,255,.7);
+      border: 1px solid rgba(255,255,255,.14);
+      padding: 2px 6px;
+      border-radius: 8px;
+      background: rgba(0,0,0,.18);
+    }
+
+    /* Hero */
+    .hero{
+      margin-top: 22px;
       display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:10px;
-      margin-top: 12px;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 18px;
+      align-items: stretch;
     }
-    .mini .box{
-      border-radius: 16px;
+    @media (max-width: 980px){
+      .hero{ grid-template-columns: 1fr; }
+      .brand{ min-width: unset; }
+      .actions{ min-width: unset; }
+    }
+    .panel{
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position: relative;
+    }
+    .panel .glow{
+      position:absolute; inset:-2px;
+      background: radial-gradient(600px 280px at 20% 20%, rgba(55,208,255,.22), transparent 60%),
+                  radial-gradient(520px 260px at 80% 10%, rgba(255,59,141,.22), transparent 60%),
+                  radial-gradient(520px 240px at 55% 95%, rgba(255,210,74,.14), transparent 60%);
+      pointer-events:none;
+      filter: blur(0px);
+    }
+    .panel .inner{ position:relative; padding: 22px 22px 20px; }
+    .title{
+      font-size: clamp(30px, 4vw, 46px);
+      line-height: 1.06;
+      margin: 0 0 12px;
+      letter-spacing: -0.6px;
+    }
+    .title .grad{
+      background: linear-gradient(90deg, var(--cyan), var(--pink), var(--yellow));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .sub{
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+      max-width: 62ch;
+    }
+    .badges{ display:flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 18px; }
+    .badge{
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 13px;
       border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
-      padding: 12px;
+      color: rgba(255,255,255,.82);
+      display:flex; gap: 8px; align-items:center;
     }
-    .mini .box .k{ font-size:12px; color: rgba(255,255,255,.62); }
-    .mini .box .v{ margin-top:6px; font-size:18px; font-weight:850; }
+    .dot{
+      width: 8px; height: 8px; border-radius: 99px;
+      background: var(--ok);
+      box-shadow: 0 0 0 3px rgba(61,255,178,.14);
+    }
+    .ctaRow{ display:flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+    .ghost{
+      border-color: rgba(255,255,255,.14);
+      background: rgba(0,0,0,.14);
+    }
 
-    /* 内容区块 */
-    .section{
-      margin-top: 22px;
+    /* 右侧卡片 */
+    .sideTop{
       padding: 18px;
     }
-    .section-title{
-      display:flex; align-items:baseline; justify-content:space-between; gap:10px;
-      margin-bottom: 10px;
-    }
-    .section-title h3{
-      margin: 0;
-      font-size: 16px;
-      letter-spacing:.3px;
-    }
-    .section-title p{
-      margin: 0;
-      color: rgba(255,255,255,.62);
-      font-size: 13px;
-    }
-
-    .grid2{
+    .statGrid{
       display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
     }
-    @media (max-width: 920px){
-      .grid2{ grid-template-columns: 1fr; }
-    }
-    .feature{
-      padding: 14px;
-      border-radius: 18px;
-      border:1px solid rgba(255,255,255,.12);
+    .stat{
+      border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
-      min-height: 98px;
+      border-radius: 16px;
+      padding: 12px 12px;
+      min-height: 86px;
     }
-    .feature .t{ font-weight:800; margin-bottom: 6px; }
-    .feature .d{ color: rgba(255,255,255,.70); font-size: 13px; line-height:1.6; }
-
-    /* 漂浮粒子（打call） */
-    .burst{
-      position: fixed;
-      inset:0;
-      pointer-events:none;
-      overflow:hidden;
-      z-index: 100;
+    .stat h4{ margin:0; font-size: 12px; color: rgba(255,255,255,.72); letter-spacing: .2px; }
+    .stat .num{
+      margin-top: 8px;
+      font-size: 22px;
+      font-weight: 900;
+      font-family: var(--mono);
     }
-    .p{
-      position:absolute;
+    .stat .hint{
+      margin-top: 6px;
+      font-size: 12px;
+      color: rgba(255,255,255,.6);
+      line-height: 1.4;
+    }
+    .miniPlayer{
+      margin-top: 12px;
+      border-top: 1px dashed rgba(255,255,255,.12);
+      padding-top: 12px;
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      justify-content: space-between;
+    }
+    .miniPlayer .left{
+      display:flex; gap:10px; align-items:center;
+      min-width: 0;
+    }
+    .disc{
+      width: 44px; height: 44px; border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.18);
+      background:
+        radial-gradient(12px 12px at 45% 45%, rgba(255,255,255,.85), rgba(255,255,255,0) 60%),
+        conic-gradient(from 160deg, rgba(55,208,255,.9), rgba(255,59,141,.9), rgba(255,210,74,.9), rgba(55,208,255,.9));
+      animation: disc 6s linear infinite;
+      filter: saturate(1.1);
+    }
+    @keyframes disc{ to{ transform: rotate(360deg);} }
+    .track{
+      min-width: 0;
+    }
+    .track b{
+      display:block;
       font-size: 14px;
-      filter: drop-shadow(0 10px 16px rgba(0,0,0,.45));
-      opacity:0;
-      animation: floatUp 1.25s ease forwards;
-      user-select:none;
-      white-space:nowrap;
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
     }
-    @keyframes floatUp{
-      0%{ transform: translate(-50%, 0) scale(.95); opacity: 0; }
-      10%{ opacity: 1; }
-      100%{ transform: translate(-50%, -120px) scale(1.15); opacity: 0; }
+    .track span{
+      display:block;
+      font-size: 12px;
+      color: rgba(255,255,255,.62);
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* 内容区 */
+    .grid{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 980px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+    .card{
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      border-radius: var(--radius);
+      box-shadow: 0 18px 50px rgba(0,0,0,.25);
+      padding: 16px;
+      position: relative;
+      overflow:hidden;
+    }
+    .card:before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      background: radial-gradient(460px 180px at 10% 0%, rgba(55,208,255,.16), transparent 60%),
+                  radial-gradient(460px 180px at 90% 10%, rgba(255,59,141,.14), transparent 60%);
+      pointer-events:none;
+    }
+    .card > *{ position:relative; }
+    .card h3{ margin: 0 0 8px; font-size: 16px; }
+    .card p{ margin: 0 0 12px; color: rgba(255,255,255,.70); line-height: 1.7; font-size: 14px; }
+    .list{ display:flex; flex-direction: column; gap: 8px; }
+    .item{
+      display:flex; gap: 10px; align-items:flex-start;
+      padding: 10px 10px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.14);
+      transition: .18s ease;
+    }
+    .item:hover{ transform: translateY(-1px); background: rgba(255,255,255,.06); }
+    .icon{
+      width: 34px; height: 34px; border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      display:grid; place-items:center;
+      font-family: var(--mono);
+      font-weight: 900;
+    }
+    .item b{ display:block; font-size: 14px; }
+    .item span{ display:block; font-size: 12px; color: rgba(255,255,255,.62); margin-top: 2px; line-height: 1.5; }
+
+    /* 弹窗 */
+    .modalMask{
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index: 50;
+      padding: 18px;
+    }
+    .modal{
+      width: min(760px, 100%);
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
+      backdrop-filter: blur(14px);
+      box-shadow: 0 30px 90px rgba(0,0,0,.6);
+      overflow:hidden;
+      position: relative;
+    }
+    .modal header{
+      display:flex; justify-content: space-between; align-items:center;
+      padding: 16px 18px;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+    .modal header b{ font-size: 14px; letter-spacing: .2px; }
+    .close{
+      border:none;
+      background: rgba(255,255,255,.08);
+      color: rgba(255,255,255,.9);
+      width: 38px; height: 38px;
+      border-radius: 14px;
+      cursor:pointer;
+    }
+    .modal .body{ padding: 16px 18px 18px; color: rgba(255,255,255,.78); line-height: 1.75; }
+    .code{
+      font-family: var(--mono);
+      font-size: 12px;
+      background: rgba(0,0,0,.25);
+      border: 1px solid rgba(255,255,255,.10);
+      padding: 12px;
+      border-radius: 16px;
+      overflow:auto;
+      color: rgba(255,255,255,.86);
     }
 
     /* 页脚 */
     footer{
-      margin-top: 26px;
-      color: rgba(255,255,255,.55);
+      margin-top: 18px;
+      color: rgba(255,255,255,.52);
       font-size: 12px;
-      text-align:center;
-      padding: 18px 0 0;
+      display:flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 0 6px;
     }
-    .kbd{
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      padding: 2px 6px;
-      border-radius: 8px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.04);
-      color: rgba(255,255,255,.8);
-    }
-
-    /* 小彩蛋弹层 */
-    .toast{
-      position: fixed;
-      left: 50%;
-      bottom: 18px;
-      transform: translateX(-50%);
-      padding: 10px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(7,8,18,.62);
-      backdrop-filter: blur(12px);
-      color: rgba(255,255,255,.82);
-      font-size: 13px;
-      opacity: 0;
-      pointer-events:none;
-      transition: opacity .2s ease, transform .2s ease;
-      z-index: 120;
-    }
-    .toast.show{
-      opacity: 1;
-      transform: translateX(-50%) translateY(-4px);
-    }
+    .sep{ opacity:.35; margin: 0 6px; }
   </style>
 </head>
 
 <body>
-  <div class="glow"></div>
-  <div class="grid"></div>
-  <div class="burst" id="burst"></div>
-  <div class="toast" id="toast"></div>
-
-  <header class="nav">
-    <div class="nav-inner">
+  <div class="wrap">
+    <nav class="nav" aria-label="Top Navigation">
       <div class="brand">
         <div class="logo" aria-hidden="true"></div>
         <div>
-          <div class="name">IKUN · <span class="grad">坤坤应援站</span></div>
-          <div class="tag">首页 Landing</div>
-        </div>
-      </div>
-      <nav class="nav-links">
-        <a class="link" href="#support">应援</a>
-        <a class="link" href="#about">关于</a>
-        <a class="link" href="#join">加入</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="wrap">
-    <section class="hero">
-      <div class="card hero-left">
-        <div class="kicker"><span class="dot" aria-hidden="true"></span> 今日应援进行中 · 站点氛围已拉满</div>
-        <h1>
-          这里是 <span class="grad">ikun 的坤坤</span> 首页<br />
-          一键开启打 call 模式
-        </h1>
-        <p class="desc">
-          这是一个可直接用于首页的单文件模板：霓虹渐变、动感背景、应援进度、互动特效。
-          你可以把文案/链接/图片位替换成自己的内容，秒上线。
-        </p>
-
-        <div class="cta">
-          <button class="btn primary" id="btnCall" type="button" title="疯狂打call（快捷键：C）">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M12 21s-7-4.4-9.5-9.1C.6 8.7 2.4 6 5.4 6c1.7 0 3 .9 3.8 2 0 0 1.4-2 3.8-2 3 0 4.8 2.7 2.9 5.9C19 16.6 12 21 12 21z" stroke="rgba(255,255,255,.92)" stroke-width="1.8" stroke-linejoin="round"/>
-            </svg>
-            打 call
-          </button>
-
-          <button class="btn" id="btnScroll" type="button" title="跳转到应援区">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M12 5v14M6 13l6 6 6-6" stroke="rgba(255,255,255,.86)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            进入应援区
-          </button>
-
-          <button class="btn" id="btnMode" type="button" title="切换节奏">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M12 2v6m0 8v6M4.9 4.9l4.2 4.2m5.8 5.8l4.2 4.2M2 12h6m8 0h6M4.9 19.1l4.2-4.2m5.8-5.8l4.2-4.2"
-                stroke="rgba(255,255,255,.86)" stroke-width="1.8" stroke-linecap="round"/>
-            </svg>
-            切换节奏
-          </button>
-        </div>
-
-        <div class="hint">
-          小技巧：按 <span class="kbd">C</span> 打 call，按 <span class="kbd">J</span> 触发彩蛋。
-        </div>
-
-        <div class="stats" aria-label="站点数据">
-          <div class="pill">应援值 <b id="score">0</b></div>
-          <div class="pill">热度 <b id="heat">35%</b></div>
-          <div class="pill">状态 <b id="status">在线</b></div>
+          <strong>iKun · 坤坤主页</strong>
+          <small id="subtitle">CALL ME · IKUN</small>
         </div>
       </div>
 
-      <aside class="card hero-right" id="support">
-        <div class="panel">
-          <h2>应援进度</h2>
-          <div class="meter" aria-label="应援进度条"><span id="bar"></span></div>
-          <div class="row">
-            <div>当前热度</div>
-            <div class="big" id="heatText">35%</div>
+      <div class="navlinks">
+        <a class="chip" href="#modules">模块</a>
+        <a class="chip" href="#links">链接</a>
+        <a class="chip" href="#about">关于</a>
+        <a class="chip" href="javascript:void(0)" id="openModal">说明</a>
+      </div>
+
+      <div class="actions">
+        <button class="btn ghost" id="toggleMusic" title="切换小动画">
+          <span>🎧</span><span>节奏</span><span class="kbd">M</span>
+        </button>
+        <button class="btn primary" id="randomize">
+          <span>✨</span><span>来点坤味</span><span class="kbd">R</span>
+        </button>
+      </div>
+    </nav>
+
+    <section class="hero" id="about">
+      <div class="panel">
+        <div class="glow" aria-hidden="true"></div>
+        <div class="inner">
+          <h1 class="title">
+            这里是 <span class="grad">iKun · 坤坤风格</span> 首页
+          </h1>
+          <p class="sub">
+                     </p>
+
+          <div class="badges" aria-label="Highlights">
+            <div class="badge"><span class="dot"></span> 唱</div>
+            <div class="badge"><span class="dot" style="background:var(--cyan);box-shadow:0 0 0 3px rgba(55,208,255,.14)"></span>跳</div>
+            <div class="badge"><span class="dot" style="background:var(--pink);box-shadow:0 0 0 3px rgba(255,59,141,.14)"></span> Rap</div>
           </div>
 
-          <div class="mini">
-            <div class="box">
-              <div class="k">今日口号</div>
-              <div class="v">稳住 · 拉满</div>
+          <div class="ctaRow">
+            <a class="btn primary" href="#links"><span>🚀</span>进入导航</a>
+            <a class="btn ghost" href="#modules"><span>🧩</span>查看模块</a>
+            <button class="btn ghost" id="copyTag"><span>📋</span>复制口号</button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="panel">
+        <div class="glow" aria-hidden="true" style="opacity:.75"></div>
+        <div class="inner sideTop">
+          <div class="statGrid" role="group" aria-label="Mini Stats">
+            <div class="stat">
+              <h4>今日状态</h4>
+              <div class="num" id="statusText">热爱中</div>
+              <div class="hint">一切为了更好的舞台表现</div>
             </div>
-            <div class="box">
-              <div class="k">应援节奏</div>
-              <div class="v" id="tempo">柔光</div>
+            <div class="stat">
+              <h4>能量值</h4>
+              <div class="num"><span id="energy">87</span>%</div>
+              <div class="hint">点击“来点坤味”刷新</div>
             </div>
           </div>
 
-          <div style="margin-top:12px; color: rgba(255,255,255,.70); font-size: 13px; line-height:1.65;">
-            点击 <b>打 call</b> 会提升热度并产生飘字特效。你也可以把这里替换成：
-            <ul style="margin:8px 0 0; padding-left: 18px;">
-              <li>活动公告</li>
-              <li>粉丝团入口</li>
-              <li>轮播图/视频位（自行添加）</li>
-            </ul>
+          <div class="miniPlayer" aria-label="Mini Player">
+            <div class="left">
+              <div class="disc" id="disc" aria-hidden="true"></div>
+              <div class="track">
+                <b id="trackTitle">练习时长 · 加载中…</b>
+                <span id="trackSub">iKun Mode · Neon Glass</span>
+              </div>
+            </div>
+            <button class="btn" id="nextTrack" title="下一条">
+              <span>⏭</span><span class="kbd">N</span>
+            </button>
           </div>
         </div>
       </aside>
     </section>
 
-    <section class="card section" id="about">
-      <div class="section-title">
-        <h3>首页模块</h3>
-        <p>三块内容位，适合放宣传/入口/公告</p>
+    <section class="grid" id="modules" aria-label="Modules">
+      <div class="card">
+        <h3>📣 公告板</h3>
+        <p id="notice">欢迎来到 iKun 首页</p>
+        <div class="list">
+          <div class="item">
+            <div class="icon">01</div>
+            <div>
+              <b>今日目标</b>
+              <span>保持自律 · 保持热爱 · 保持输出</span>
+            </div>
+          </div>
+          <div class="item">
+            <div class="icon">02</div>
+            <div>
+              <b>更新提示</b>
+              <span>你可以在 HTML 里替换“链接区”内容</span>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="grid2">
-        <div class="feature">
-          <div class="t">🎤 站内公告</div>
-          <div class="d">把你最新的活动信息、更新日志、置顶通知放在这里，用户一眼就能看到。</div>
+      <div class="card" id="links">
+        <h3>🔗 快捷导航</h3>
+        <p>把下面的链接替换成你的：博客、作品集、社媒、下载、友链等。</p>
+        <div class="list" id="linkList">
+          <a class="item" href="zlzl.de5.net" target="_blank" rel="noreferrer">
+            <div class="icon">🌐</div>
+            <div><b>我的主页</b><span></span></div>
+          </a>
+          <a class="item" href="https://example.com/blog" target="_blank" rel="noreferrer">
+            <div class="icon">📝</div>
+            <div><b>博客</b><span>随笔 / 技术 / 记录</span></div>
+          </a>
+          <a class="item" href="https://example.com/works" target="_blank" rel="noreferrer">
+            <div class="icon">🎨</div>
+            <div><b>作品集</b><span>项目展示与案例</span></div>
+          </a>
+          <a class="item" href="2057766028@qq.com">
+            <div class="icon">✉️</div>
+            <div><b>联系我</b><span>2057766028@qq.com</span></div>
+          </a>
         </div>
-        <div class="feature">
-          <div class="t">🪩 应援入口</div>
-          <div class="d">放置跳转链接：QQ群/Discord/微博超话/小程序等，让新ikun快速加入。</div>
-        </div>
-        <div class="feature">
-          <div class="t">✨ 互动彩蛋</div>
-          <div class="d">按 <span class="kbd">J</span> 触发彩蛋</div>
+      </div>
+
+      <div class="card">
+        <h3>🧪 小组件</h3>
+        <p>一些可玩的小交互：随机口号、能量条、快捷键、弹窗说明。</p>
+        <div class="list">
+          <div class="item" id="sloganBox" role="button" tabindex="0" aria-label="Click to change slogan">
+            <div class="icon">✨</div>
+            <div>
+              <b id="slogan">“热爱是唯一的答案。”</b>
+              <span>点击这条即可换一句（或按 R）</span>
+            </div>
+          </div>
+          <div class="item">
+            <div class="icon">⚡</div>
+            <div>
+              <b>能量加成</b>
+              <span>点右上角“来点坤味”随机刷新能量值</span>
+            </div>
+          </div>
+          <div class="item">
+            <div class="icon">⌨️</div>
+            <div>
+              <b>快捷键</b>
+              <span>R：随机刷新 · M：切换旋转动画 · N：下一条</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="card section" id="join">
-      <div class="section-title">
-        <h3>加入我们</h3>
-        <p>把按钮链接替换为你的真实地址即可</p>
+    <footer>
+      <div>
+        <span>© <span id="year"></span> iKun Home</span>
+        <span class="sep">•</span>
+        <span>原创模板 · 可商用改造</span>
       </div>
-
-      <div style="display:flex; gap:10px; flex-wrap:wrap;">
-        <a class="btn primary" href="javascript:void(0)" onclick="toast('把这里换成你的粉丝群链接即可～')">
-          <span aria-hidden="true">🚀</span> 加入粉丝团
-        </a>
-        <a class="btn" href="javascript:void(0)" onclick="toast('把这里换成你的活动页链接即可～')">
-          <span aria-hidden="true">📣</span> 查看活动
-        </a>
-        <a class="btn" href="javascript:void(0)" onclick="toast('把这里换成你的周边/商店链接即可～')">
-          <span aria-hidden="true">🛍️</span> 周边入口
-        </a>
+      <div>
+        <span id="clock"></span>
       </div>
+    </footer>
+  </div>
 
-      <footer>
-        © <span id="year"></span> IKUN Fan Landing 
-      </footer>
-    </section>
-  </main>
+  <!-- Modal -->
+  <div class="modalMask" id="modalMask" role="dialog" aria-modal="true" aria-label="说明弹窗">
+    <div class="modal">
+      <header>
+        <b>使用说明</b>
+        <button class="close" id="closeModal" aria-label="关闭">✕</button>
+      </header>
+      <div class="body">
+        <p>
+          你现在用的是一个“iKun 霓虹玻璃”风格的首页模板（单文件）。你可以改这些地方：
+        </p>
+        <div class="code" aria-label="Tips">
+1) 标题/描述：Hero 区域的 h1 和 p
+2) 链接：#links 区域的 <a class="item"...> 列表
+3) 口号库：JS 里的 slogans 数组
+4) 站点口号：copyTag 按钮复制的文本
+5) 颜色：:root 里的 --pink / --cyan / --yellow
+        </div>
+        <p style="margin-top:12px;">
+                 </p>
+      </div>
+    </div>
+  </div>
 
   <script>
-    const burst = document.getElementById('burst');
-    const bar = document.getElementById('bar');
-    const heatText = document.getElementById('heatText');
-    const heat = document.getElementById('heat');
-    const scoreEl = document.getElementById('score');
-    const tempoEl = document.getElementById('tempo');
-    const toastEl = document.getElementById('toast');
-
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    let score = 0;
-    let heatVal = 35;
-    let mode = 0; // 0柔光 1劲爆 2极光
+    const $ = (sel) => document.querySelector(sel);
 
     const slogans = [
-      "ikun在此！", "坤坤冲！", "打call拉满！", "稳住稳住！",
-      "热度++", "应援上分！", "一起发光！", "节奏到位！"
+      "“热爱是唯一的答案。”",
+      "“今天也要好好练习。”",
+      "“自律给我自由。”",
+      "“舞台见。”",
+      "“保持专注，持续发光。”",
+      "“把每一次当成最后一次。”",
+      "“认真生活，认真热爱。”",
+      "“步子稳一点，光会更亮。”"
     ];
 
-    function toast(msg){
-      toastEl.textContent = msg;
-      toastEl.classList.add('show');
-      clearTimeout(toastEl._t);
-      toastEl._t = setTimeout(()=>toastEl.classList.remove('show'), 1500);
+    const tracks = [
+      { title: "练习时长 · 2.5年", sub: "iKun Mode · Keep Going" },
+      { title: "节奏感 · 拉满", sub: "Neon Glass · Bounce" },
+      { title: "状态 · 在线", sub: "Focus · Energy" },
+      { title: "热爱 · 不掉线", sub: "Always · iKun" }
+    ];
+
+    let trackIndex = 0;
+    let spinning = true;
+
+    function setTrack(i){
+      trackIndex = (i + tracks.length) % tracks.length;
+      $("#trackTitle").textContent = tracks[trackIndex].title;
+      $("#trackSub").textContent = tracks[trackIndex].sub;
     }
 
-    function spawnParticle(x, y, text){
-      const el = document.createElement('div');
-      el.className = 'p';
-      el.textContent = text;
-      el.style.left = x + 'px';
-      el.style.top = y + 'px';
-      // 随机大小与轻微旋转
-      const s = 12 + Math.random() * 10;
-      const r = (Math.random() * 20 - 10);
-      el.style.fontSize = s + 'px';
-      el.style.transform = `translate(-50%, 0) rotate(${r}deg)`;
-      // 随机彩色（不指定固定色，使用CSS变量组合）
-      const hues = ['var(--pink)','var(--purple)','var(--cyan)','var(--gold)'];
-      el.style.color = hues[Math.floor(Math.random()*hues.length)];
-      burst.appendChild(el);
-      el.addEventListener('animationend', ()=> el.remove());
+    function randInt(min, max){
+      return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    function bump(){
-      score += 1;
-      heatVal = Math.min(100, heatVal + (mode === 1 ? 3 : mode === 2 ? 2 : 1));
-      scoreEl.textContent = score;
-      heatText.textContent = heatVal + '%';
-      heat.textContent = heatVal + '%';
-      bar.style.width = heatVal + '%';
+    function randomize(){
+      const energy = randInt(66, 99);
+      $("#energy").textContent = energy;
 
-      // 状态展示
-      const status = document.getElementById('status');
-      if (heatVal >= 90) status.textContent = '爆燃';
-      else if (heatVal >= 60) status.textContent = '火热';
-      else status.textContent = '在线';
+      const statuses = ["唱", "练习中", "跳", "rap", "篮球", "坚持两年半"];
+      $("#statusText").textContent = statuses[randInt(0, statuses.length - 1)];
 
-      // 触发飘字
-      const rect = document.body.getBoundingClientRect();
-      const x = (window.innerWidth * (0.18 + Math.random()*0.32));
-      const y = (window.innerHeight * (0.30 + Math.random()*0.22));
-      const text = slogans[Math.floor(Math.random()*slogans.length)];
-      spawnParticle(x, y, text);
+      $("#notice").textContent =
+        "公告更新：" + ["欢迎回来，鸡尼太美！","不多不少，两年半刚刚好。","打篮球，打出你的个性。","唱跳rap，样样精通。"][randInt(0,3)];
 
-      // 多连击时更爽一点
-      if (mode === 1) {
-        for(let i=0;i<2;i++){
-          spawnParticle(x + (Math.random()*80-40), y + (Math.random()*30-15), "🔥 热度+");
-        }
+      // slogan
+      $("#slogan").textContent = slogans[randInt(0, slogans.length - 1)];
+    }
+
+    function toggleSpin(){
+      spinning = !spinning;
+      $("#disc").style.animationPlayState = spinning ? "running" : "paused";
+    }
+
+    // modal
+    function openModal(){ $("#modalMask").style.display = "flex"; }
+    function closeModal(){ $("#modalMask").style.display = "none"; }
+
+    // copy
+    async function copyTagline(){
+      const text = "iKun · Keep Going · IKUN不掉线";
+      try{
+        await navigator.clipboard.writeText(text);
+        $("#subtitle").textContent = "已复制口号 ✅";
+        setTimeout(()=> $("#subtitle").textContent = "CALL ME · IKUN", 1200);
+      }catch(e){
+        $("#subtitle").textContent = "复制失败（浏览器限制）";
+        setTimeout(()=> $("#subtitle").textContent = "CALL ME · IKUN", 1200);
       }
     }
 
-    function setMode(next){
-      mode = next;
-      if (mode === 0){
-        tempoEl.textContent = '柔光';
-        document.body.style.background = '';
-        toast('节奏：柔光');
-      } else if (mode === 1){
-        tempoEl.textContent = '劲爆';
-        document.body.style.background =
-          'radial-gradient(1200px 600px at 20% 10%, rgba(255,62,165,.28), transparent 60%),' +
-          'radial-gradient(900px 500px at 75% 18%, rgba(124,92,255,.22), transparent 60%),' +
-          'radial-gradient(1000px 700px at 55% 95%, rgba(255,211,106,.16), transparent 55%),' +
-          'linear-gradient(180deg, #050611, #050611 40%, #070812)';
-        toast('节奏：劲爆（热度增长更快）');
-      } else {
-        tempoEl.textContent = '极光';
-        document.body.style.background =
-          'radial-gradient(1100px 600px at 35% 15%, rgba(41,230,255,.22), transparent 60%),' +
-          'radial-gradient(900px 520px at 70% 18%, rgba(255,62,165,.18), transparent 60%),' +
-          'radial-gradient(1000px 700px at 55% 95%, rgba(124,92,255,.18), transparent 55%),' +
-          'linear-gradient(180deg, #050611, #050611 40%, #070812)';
-        toast('节奏：极光');
-      }
+    // clock
+    function tick(){
+      const d = new Date();
+      const pad = (n) => String(n).padStart(2,"0");
+      $("#clock").textContent = `本地时间 ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
     }
 
-    document.getElementById('btnCall').addEventListener('click', (e)=>{
-      const x = e.clientX || (window.innerWidth/2);
-      const y = e.clientY || (window.innerHeight/2);
-      bump();
-      spawnParticle(x, y, "💗");
-    });
+    // events
+    $("#randomize").addEventListener("click", randomize);
+    $("#toggleMusic").addEventListener("click", toggleSpin);
+    $("#nextTrack").addEventListener("click", () => setTrack(trackIndex + 1));
+    $("#openModal").addEventListener("click", openModal);
+    $("#closeModal").addEventListener("click", closeModal);
+    $("#modalMask").addEventListener("click", (e) => { if(e.target.id === "modalMask") closeModal(); });
+    $("#copyTag").addEventListener("click", copyTagline);
 
-    document.getElementById('btnScroll').addEventListener('click', ()=>{
-      document.getElementById('support').scrollIntoView({behavior:'smooth', block:'start'});
+    $("#sloganBox").addEventListener("click", () => {
+      $("#slogan").textContent = slogans[randInt(0, slogans.length - 1)];
     });
-
-    document.getElementById('btnMode').addEventListener('click', ()=>{
-      setMode((mode + 1) % 3);
-    });
-
-    // 快捷键：C 打call，J 彩蛋
-    window.addEventListener('keydown', (e)=>{
-      if (e.key.toLowerCase() === 'c'){
-        bump();
-      }
-      if (e.key.toLowerCase() === 'j'){
-        // 彩蛋：短时间内连续喷射
-        toast('彩蛋触发：应援弹幕启动！');
-        let n = 0;
-        const timer = setInterval(()=>{
-          n++;
-          const x = window.innerWidth * (0.15 + Math.random()*0.70);
-          const y = window.innerHeight * (0.25 + Math.random()*0.55);
-          spawnParticle(x, y, slogans[Math.floor(Math.random()*slogans.length)]);
-          if (n > 16) clearInterval(timer);
-          // 同步热度小涨
-          if (n % 3 === 0) bump();
-        }, 80);
+    $("#sloganBox").addEventListener("keydown", (e) => {
+      if(e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        $("#sloganBox").click();
       }
     });
 
-    // 初始提示
-    setTimeout(()=>toast('点击“打 call”或按 C 试试～'), 700);
+    // shortcuts
+    window.addEventListener("keydown", (e) => {
+      if(e.key.toLowerCase() === "r") randomize();
+      if(e.key.toLowerCase() === "m") toggleSpin();
+      if(e.key.toLowerCase() === "n") setTrack(trackIndex + 1);
+      if(e.key === "Escape") closeModal();
+    });
+
+    // init
+    $("#year").textContent = new Date().getFullYear();
+    setTrack(0);
+    randomize();
+    tick();
+    setInterval(tick, 1000);
   </script>
 </body>
 </html>
