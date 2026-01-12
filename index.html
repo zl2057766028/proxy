@@ -1,722 +1,709 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>IKUN · 坤坤应援首页</title>
+  <meta name="description" content="ikun风格网页首页（单文件HTML/CSS/JS）" />
+  <style>
+    :root{
+      --bg:#070812;
+      --card: rgba(255,255,255,.08);
+      --card2: rgba(255,255,255,.05);
+      --stroke: rgba(255,255,255,.14);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.70);
+      --pink:#ff3ea5;
+      --purple:#7c5cff;
+      --cyan:#29e6ff;
+      --gold:#ffd36a;
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --r: 22px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", "Noto Sans SC", Arial, sans-serif;
+      color:var(--text);
+      background: radial-gradient(1200px 600px at 20% 10%, rgba(124,92,255,.22), transparent 60%),
+                  radial-gradient(900px 500px at 75% 18%, rgba(255,62,165,.18), transparent 60%),
+                  radial-gradient(1000px 700px at 55% 95%, rgba(41,230,255,.14), transparent 55%),
+                  linear-gradient(180deg, #050611, #050611 40%, #070812);
+      overflow-x:hidden;
+    }
+
+    /* 背景动效网格 */
+    .grid{
+      position:fixed; inset:0;
+      pointer-events:none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(600px 420px at 50% 20%, black 30%, transparent 65%);
+      opacity:.35;
+      transform: translateZ(0);
+    }
+
+    /* 流光 */
+    .glow{
+      position:fixed; inset:-40vh -40vw;
+      pointer-events:none;
+      background:
+        conic-gradient(from 210deg at 50% 50%,
+          rgba(255,62,165,.0),
+          rgba(255,62,165,.35),
+          rgba(124,92,255,.25),
+          rgba(41,230,255,.22),
+          rgba(255,211,106,.18),
+          rgba(255,62,165,.0));
+      filter: blur(50px);
+      opacity:.55;
+      animation: drift 16s ease-in-out infinite;
+    }
+    @keyframes drift{
+      0%,100%{ transform: translate(-2%, -1%) rotate(0deg) }
+      50%{ transform: translate(2%, 1%) rotate(18deg) }
+    }
+
+    /* 顶部导航 */
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(12px);
+      background: linear-gradient(180deg, rgba(7,8,18,.72), rgba(7,8,18,.35));
+      border-bottom: 1px solid rgba(255,255,255,.10);
+    }
+    .nav-inner{
+      max-width:1100px;
+      margin:0 auto;
+      padding:14px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      user-select:none;
+    }
+    .logo{
+      width:36px; height:36px; border-radius:12px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,62,165,.9), rgba(124,92,255,.85) 40%, rgba(41,230,255,.75) 75%);
+      box-shadow: 0 10px 30px rgba(124,92,255,.25);
+      position:relative;
+      overflow:hidden;
+    }
+    .logo:after{
+      content:"";
+      position:absolute; inset:-40%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.45), transparent);
+      transform: rotate(25deg);
+      animation: shine 2.8s ease-in-out infinite;
+      opacity:.55;
+    }
+    @keyframes shine{
+      0%{ transform: translateX(-30%) rotate(25deg) }
+      50%{ transform: translateX(30%) rotate(25deg) }
+      100%{ transform: translateX(-30%) rotate(25deg) }
+    }
+    .brand .name{
+      font-weight:800;
+      letter-spacing:.6px;
+    }
+    .tag{
+      font-size:12px;
+      color:var(--muted);
+      padding:4px 10px;
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:999px;
+      background: rgba(255,255,255,.04);
+    }
+    .nav-links{
+      display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+    }
+    .link{
+      font-size:13px;
+      color:var(--muted);
+      text-decoration:none;
+      padding:8px 10px;
+      border-radius:12px;
+      transition:.2s ease;
+    }
+    .link:hover{
+      color:var(--text);
+      background: rgba(255,255,255,.06);
+    }
+
+    /* 容器 */
+    .wrap{ max-width:1100px; margin:0 auto; padding: 28px 18px 80px; }
+
+    /* 首屏 */
+    .hero{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:22px;
+      align-items:stretch;
+      margin-top:10px;
+    }
+    @media (max-width: 920px){
+      .hero{ grid-template-columns: 1fr; }
+    }
+    .card{
+      border-radius: var(--r);
+      border: 1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .card::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(700px 260px at 20% 10%, rgba(255,62,165,.22), transparent 60%),
+                  radial-gradient(600px 300px at 90% 0%, rgba(41,230,255,.16), transparent 55%);
+      pointer-events:none;
+      opacity:.9;
+    }
+    .card > *{ position:relative; z-index:2; }
+
+    .hero-left{ padding: 28px 26px; }
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color:var(--muted);
+      font-size:13px;
+    }
+    .dot{
+      width:8px; height:8px; border-radius:99px;
+      background: var(--pink);
+      box-shadow: 0 0 0 6px rgba(255,62,165,.16);
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+    @keyframes pulse{
+      0%,100%{ transform: scale(1); opacity: .9 }
+      50%{ transform: scale(1.15); opacity: .65 }
+    }
+
+    h1{
+      margin: 14px 0 10px;
+      font-size: clamp(32px, 4.6vw, 54px);
+      line-height: 1.05;
+      letter-spacing: .4px;
+    }
+    .grad{
+      background: linear-gradient(90deg, var(--pink), var(--purple) 45%, var(--cyan));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .desc{
+      margin: 10px 0 18px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height:1.7;
+      max-width: 52ch;
+    }
+    .cta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-items:center;
+    }
+    .btn{
+      border:0;
+      cursor:pointer;
+      border-radius: 16px;
+      padding: 12px 14px;
+      font-weight: 700;
+      color: rgba(255,255,255,.94);
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.14);
+      transition: transform .15s ease, background .2s ease, border-color .2s ease;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      user-select:none;
+    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.2); }
+    .btn:active{ transform: translateY(0px) scale(.99); }
+    .btn.primary{
+      background: linear-gradient(90deg, rgba(255,62,165,.9), rgba(124,92,255,.86), rgba(41,230,255,.80));
+      border-color: rgba(255,255,255,.18);
+      box-shadow: 0 14px 40px rgba(124,92,255,.18);
+    }
+    .btn .icon{ width:18px; height:18px; display:inline-block; }
+    .hint{
+      font-size: 13px;
+      color: rgba(255,255,255,.62);
+      margin-top: 12px;
+    }
+    .stats{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top: 16px;
+    }
+    .pill{
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.78);
+      font-size: 13px;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+    }
+    .pill b{ color: rgba(255,255,255,.95); }
+
+    /* 右侧：应援面板 */
+    .hero-right{ padding: 20px; }
+    .panel{
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+    }
+    .panel h2{
+      margin: 0 0 10px;
+      font-size: 16px;
+      letter-spacing: .4px;
+      color: rgba(255,255,255,.9);
+    }
+    .meter{
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      overflow:hidden;
+      position:relative;
+    }
+    .meter > span{
+      display:block;
+      height:100%;
+      width: 35%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--pink), var(--purple), var(--cyan));
+      box-shadow: 0 0 20px rgba(255,62,165,.25);
+      transition: width .35s ease;
+    }
+    .row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-top: 10px;
+      color: rgba(255,255,255,.72);
+      font-size: 13px;
+    }
+    .row .big{ font-weight:800; color: rgba(255,255,255,.92); }
+    .mini{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      margin-top: 12px;
+    }
+    .mini .box{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      padding: 12px;
+    }
+    .mini .box .k{ font-size:12px; color: rgba(255,255,255,.62); }
+    .mini .box .v{ margin-top:6px; font-size:18px; font-weight:850; }
+
+    /* 内容区块 */
+    .section{
+      margin-top: 22px;
+      padding: 18px;
+    }
+    .section-title{
+      display:flex; align-items:baseline; justify-content:space-between; gap:10px;
+      margin-bottom: 10px;
+    }
+    .section-title h3{
+      margin: 0;
+      font-size: 16px;
+      letter-spacing:.3px;
+    }
+    .section-title p{
+      margin: 0;
+      color: rgba(255,255,255,.62);
+      font-size: 13px;
+    }
+
+    .grid2{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 920px){
+      .grid2{ grid-template-columns: 1fr; }
+    }
+    .feature{
+      padding: 14px;
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      min-height: 98px;
+    }
+    .feature .t{ font-weight:800; margin-bottom: 6px; }
+    .feature .d{ color: rgba(255,255,255,.70); font-size: 13px; line-height:1.6; }
+
+    /* 漂浮粒子（打call） */
+    .burst{
+      position: fixed;
+      inset:0;
+      pointer-events:none;
+      overflow:hidden;
+      z-index: 100;
+    }
+    .p{
+      position:absolute;
+      font-size: 14px;
+      filter: drop-shadow(0 10px 16px rgba(0,0,0,.45));
+      opacity:0;
+      animation: floatUp 1.25s ease forwards;
+      user-select:none;
+      white-space:nowrap;
+    }
+    @keyframes floatUp{
+      0%{ transform: translate(-50%, 0) scale(.95); opacity: 0; }
+      10%{ opacity: 1; }
+      100%{ transform: translate(-50%, -120px) scale(1.15); opacity: 0; }
+    }
+
+    /* 页脚 */
+    footer{
+      margin-top: 26px;
+      color: rgba(255,255,255,.55);
+      font-size: 12px;
+      text-align:center;
+      padding: 18px 0 0;
+    }
+    .kbd{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      padding: 2px 6px;
+      border-radius: 8px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.8);
+    }
+
+    /* 小彩蛋弹层 */
+    .toast{
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(7,8,18,.62);
+      backdrop-filter: blur(12px);
+      color: rgba(255,255,255,.82);
+      font-size: 13px;
+      opacity: 0;
+      pointer-events:none;
+      transition: opacity .2s ease, transform .2s ease;
+      z-index: 120;
+    }
+    .toast.show{
+      opacity: 1;
+      transform: translateX(-50%) translateY(-4px);
+    }
+  </style>
 </head>
+
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
-            </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+  <div class="glow"></div>
+  <div class="grid"></div>
+  <div class="burst" id="burst"></div>
+  <div class="toast" id="toast"></div>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
+  <header class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <div class="name">IKUN · <span class="grad">坤坤应援站</span></div>
+          <div class="tag">首页 Landing</div>
         </div>
+      </div>
+      <nav class="nav-links">
+        <a class="link" href="#support">应援</a>
+        <a class="link" href="#about">关于</a>
+        <a class="link" href="#join">加入</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="card hero-left">
+        <div class="kicker"><span class="dot" aria-hidden="true"></span> 今日应援进行中 · 站点氛围已拉满</div>
+        <h1>
+          这里是 <span class="grad">ikun 的坤坤</span> 首页<br />
+          一键开启打 call 模式
+        </h1>
+        <p class="desc">
+          这是一个可直接用于首页的单文件模板：霓虹渐变、动感背景、应援进度、互动特效。
+          你可以把文案/链接/图片位替换成自己的内容，秒上线。
+        </p>
+
+        <div class="cta">
+          <button class="btn primary" id="btnCall" type="button" title="疯狂打call（快捷键：C）">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 21s-7-4.4-9.5-9.1C.6 8.7 2.4 6 5.4 6c1.7 0 3 .9 3.8 2 0 0 1.4-2 3.8-2 3 0 4.8 2.7 2.9 5.9C19 16.6 12 21 12 21z" stroke="rgba(255,255,255,.92)" stroke-width="1.8" stroke-linejoin="round"/>
+            </svg>
+            打 call
+          </button>
+
+          <button class="btn" id="btnScroll" type="button" title="跳转到应援区">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 5v14M6 13l6 6 6-6" stroke="rgba(255,255,255,.86)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            进入应援区
+          </button>
+
+          <button class="btn" id="btnMode" type="button" title="切换节奏">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 2v6m0 8v6M4.9 4.9l4.2 4.2m5.8 5.8l4.2 4.2M2 12h6m8 0h6M4.9 19.1l4.2-4.2m5.8-5.8l4.2-4.2"
+                stroke="rgba(255,255,255,.86)" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+            切换节奏
+          </button>
+        </div>
+
+        <div class="hint">
+          小技巧：按 <span class="kbd">C</span> 打 call，按 <span class="kbd">J</span> 触发彩蛋。
+        </div>
+
+        <div class="stats" aria-label="站点数据">
+          <div class="pill">应援值 <b id="score">0</b></div>
+          <div class="pill">热度 <b id="heat">35%</b></div>
+          <div class="pill">状态 <b id="status">在线</b></div>
+        </div>
+      </div>
+
+      <aside class="card hero-right" id="support">
+        <div class="panel">
+          <h2>应援进度</h2>
+          <div class="meter" aria-label="应援进度条"><span id="bar"></span></div>
+          <div class="row">
+            <div>当前热度</div>
+            <div class="big" id="heatText">35%</div>
+          </div>
+
+          <div class="mini">
+            <div class="box">
+              <div class="k">今日口号</div>
+              <div class="v">稳住 · 拉满</div>
+            </div>
+            <div class="box">
+              <div class="k">应援节奏</div>
+              <div class="v" id="tempo">柔光</div>
+            </div>
+          </div>
+
+          <div style="margin-top:12px; color: rgba(255,255,255,.70); font-size: 13px; line-height:1.65;">
+            点击 <b>打 call</b> 会提升热度并产生飘字特效。你也可以把这里替换成：
+            <ul style="margin:8px 0 0; padding-left: 18px;">
+              <li>活动公告</li>
+              <li>粉丝团入口</li>
+              <li>轮播图/视频位（自行添加）</li>
+            </ul>
+          </div>
+        </div>
+      </aside>
     </section>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
-            </div>
+    <section class="card section" id="about">
+      <div class="section-title">
+        <h3>首页模块</h3>
+        <p>三块内容位，适合放宣传/入口/公告</p>
+      </div>
+
+      <div class="grid2">
+        <div class="feature">
+          <div class="t">🎤 站内公告</div>
+          <div class="d">把你最新的活动信息、更新日志、置顶通知放在这里，用户一眼就能看到。</div>
         </div>
+        <div class="feature">
+          <div class="t">🪩 应援入口</div>
+          <div class="d">放置跳转链接：QQ群/Discord/微博超话/小程序等，让新ikun快速加入。</div>
+        </div>
+        <div class="feature">
+          <div class="t">✨ 互动彩蛋</div>
+          <div class="d">按 <span class="kbd">J</span> 触发彩蛋</div>
+        </div>
+      </div>
     </section>
 
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
-            </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <section class="card section" id="join">
+      <div class="section-title">
+        <h3>加入我们</h3>
+        <p>把按钮链接替换为你的真实地址即可</p>
+      </div>
+
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a class="btn primary" href="javascript:void(0)" onclick="toast('把这里换成你的粉丝群链接即可～')">
+          <span aria-hidden="true">🚀</span> 加入粉丝团
+        </a>
+        <a class="btn" href="javascript:void(0)" onclick="toast('把这里换成你的活动页链接即可～')">
+          <span aria-hidden="true">📣</span> 查看活动
+        </a>
+        <a class="btn" href="javascript:void(0)" onclick="toast('把这里换成你的周边/商店链接即可～')">
+          <span aria-hidden="true">🛍️</span> 周边入口
+        </a>
+      </div>
+
+      <footer>
+        © <span id="year"></span> IKUN Fan Landing 
+      </footer>
     </section>
+  </main>
 
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
-        </div>
-    </section>
+  <script>
+    const burst = document.getElementById('burst');
+    const bar = document.getElementById('bar');
+    const heatText = document.getElementById('heatText');
+    const heat = document.getElementById('heat');
+    const scoreEl = document.getElementById('score');
+    const tempoEl = document.getElementById('tempo');
+    const toastEl = document.getElementById('toast');
 
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
+    let score = 0;
+    let heatVal = 35;
+    let mode = 0; // 0柔光 1劲爆 2极光
 
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
-            
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
+    const slogans = [
+      "ikun在此！", "坤坤冲！", "打call拉满！", "稳住稳住！",
+      "热度++", "应援上分！", "一起发光！", "节奏到位！"
+    ];
+
+    function toast(msg){
+      toastEl.textContent = msg;
+      toastEl.classList.add('show');
+      clearTimeout(toastEl._t);
+      toastEl._t = setTimeout(()=>toastEl.classList.remove('show'), 1500);
+    }
+
+    function spawnParticle(x, y, text){
+      const el = document.createElement('div');
+      el.className = 'p';
+      el.textContent = text;
+      el.style.left = x + 'px';
+      el.style.top = y + 'px';
+      // 随机大小与轻微旋转
+      const s = 12 + Math.random() * 10;
+      const r = (Math.random() * 20 - 10);
+      el.style.fontSize = s + 'px';
+      el.style.transform = `translate(-50%, 0) rotate(${r}deg)`;
+      // 随机彩色（不指定固定色，使用CSS变量组合）
+      const hues = ['var(--pink)','var(--purple)','var(--cyan)','var(--gold)'];
+      el.style.color = hues[Math.floor(Math.random()*hues.length)];
+      burst.appendChild(el);
+      el.addEventListener('animationend', ()=> el.remove());
+    }
+
+    function bump(){
+      score += 1;
+      heatVal = Math.min(100, heatVal + (mode === 1 ? 3 : mode === 2 ? 2 : 1));
+      scoreEl.textContent = score;
+      heatText.textContent = heatVal + '%';
+      heat.textContent = heatVal + '%';
+      bar.style.width = heatVal + '%';
+
+      // 状态展示
+      const status = document.getElementById('status');
+      if (heatVal >= 90) status.textContent = '爆燃';
+      else if (heatVal >= 60) status.textContent = '火热';
+      else status.textContent = '在线';
+
+      // 触发飘字
+      const rect = document.body.getBoundingClientRect();
+      const x = (window.innerWidth * (0.18 + Math.random()*0.32));
+      const y = (window.innerHeight * (0.30 + Math.random()*0.22));
+      const text = slogans[Math.floor(Math.random()*slogans.length)];
+      spawnParticle(x, y, text);
+
+      // 多连击时更爽一点
+      if (mode === 1) {
+        for(let i=0;i<2;i++){
+          spawnParticle(x + (Math.random()*80-40), y + (Math.random()*30-15), "🔥 热度+");
         }
+      }
+    }
 
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
+    function setMode(next){
+      mode = next;
+      if (mode === 0){
+        tempoEl.textContent = '柔光';
+        document.body.style.background = '';
+        toast('节奏：柔光');
+      } else if (mode === 1){
+        tempoEl.textContent = '劲爆';
+        document.body.style.background =
+          'radial-gradient(1200px 600px at 20% 10%, rgba(255,62,165,.28), transparent 60%),' +
+          'radial-gradient(900px 500px at 75% 18%, rgba(124,92,255,.22), transparent 60%),' +
+          'radial-gradient(1000px 700px at 55% 95%, rgba(255,211,106,.16), transparent 55%),' +
+          'linear-gradient(180deg, #050611, #050611 40%, #070812)';
+        toast('节奏：劲爆（热度增长更快）');
+      } else {
+        tempoEl.textContent = '极光';
+        document.body.style.background =
+          'radial-gradient(1100px 600px at 35% 15%, rgba(41,230,255,.22), transparent 60%),' +
+          'radial-gradient(900px 520px at 70% 18%, rgba(255,62,165,.18), transparent 60%),' +
+          'radial-gradient(1000px 700px at 55% 95%, rgba(124,92,255,.18), transparent 55%),' +
+          'linear-gradient(180deg, #050611, #050611 40%, #070812)';
+        toast('节奏：极光');
+      }
+    }
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
-        });
-    </script>
+    document.getElementById('btnCall').addEventListener('click', (e)=>{
+      const x = e.clientX || (window.innerWidth/2);
+      const y = e.clientY || (window.innerHeight/2);
+      bump();
+      spawnParticle(x, y, "💗");
+    });
+
+    document.getElementById('btnScroll').addEventListener('click', ()=>{
+      document.getElementById('support').scrollIntoView({behavior:'smooth', block:'start'});
+    });
+
+    document.getElementById('btnMode').addEventListener('click', ()=>{
+      setMode((mode + 1) % 3);
+    });
+
+    // 快捷键：C 打call，J 彩蛋
+    window.addEventListener('keydown', (e)=>{
+      if (e.key.toLowerCase() === 'c'){
+        bump();
+      }
+      if (e.key.toLowerCase() === 'j'){
+        // 彩蛋：短时间内连续喷射
+        toast('彩蛋触发：应援弹幕启动！');
+        let n = 0;
+        const timer = setInterval(()=>{
+          n++;
+          const x = window.innerWidth * (0.15 + Math.random()*0.70);
+          const y = window.innerHeight * (0.25 + Math.random()*0.55);
+          spawnParticle(x, y, slogans[Math.floor(Math.random()*slogans.length)]);
+          if (n > 16) clearInterval(timer);
+          // 同步热度小涨
+          if (n % 3 === 0) bump();
+        }, 80);
+      }
+    });
+
+    // 初始提示
+    setTimeout(()=>toast('点击“打 call”或按 C 试试～'), 700);
+  </script>
 </body>
-
 </html>
