@@ -5,7 +5,6 @@
 
 ---
 
-Telegram交流反馈群组：https://t.me/eooceu
 
 huggingface视频教程地址：https://youtu.be/XERxg9AODeo
 </div>
@@ -70,6 +69,6 @@ function getRandomArray(array) {
 - 通过本项目直接或间接获利（例如通过广告、SaaS服务等）；
 - 在公司或组织内部作为商业工具使用。
 
-如需获得商业授权，请联系原作者：[admin@eooce.com]
+
 
 版权所有 ©2025 `eooce`
