@@ -1,13 +1,5 @@
 #!/usr/bin/env node
 
-/**
- * ✅ 适配 Hugging Face Spaces（Docker）“Starting…”问题的完整 index.js
- * 关键改动：
- *  1) 必须监听 process.env.PORT（HF 默认 7860）并绑定 0.0.0.0
- *  2) 解析 WS 首包全部加边界检查，避免 Node 20+ Buffer 越界崩溃导致无限重启
- *  3) 哪吒下载/外部请求增加超时与兜底，避免启动阶段卡死
- *  4) AUTO_ACCESS 做字符串布尔解析，避免环境变量 "false" 被当成 true
- */
 
 const os = require('os');
 const http = require('http');
